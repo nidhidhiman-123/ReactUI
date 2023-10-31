@@ -117,9 +117,9 @@ const Products = ({}) => {
                   />
                 </div>
               </div>
-              <button className="add-cart-btn" >
+              <div className="add-cart-btn" >
                 <span className="btn-txt-cart">Add to bag</span>
-              </button>
+              </div>
             </div>
           </div>
         </div>

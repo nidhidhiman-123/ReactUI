@@ -1,10 +1,10 @@
 import React, { useState,useEffect } from "react";
 import "./index.css";
 import Header from "../Header/header";
-
+import { useNavigate } from "react-router-dom";
 const Form1 = () => {
-  const [showPopup, setShowPopup] = useState(true);
-
+  const [showPopup, setShowPopup] = useState(false);
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -55,27 +55,32 @@ const Form1 = () => {
     if (validateForm()) {
       console.log(formData);
       setFormData({ name: "", email: "" });
+      navigate("/products");
     }
+   
   };
 
   const handleCloseIconClick = (e) => {
     e.stopPropagation();
     setShowPopup(false);
+    navigate("/products");
   };
 
   useEffect(() => {
     const timer = setTimeout(() => {
       setShowPopup(true);
-    }, 10000);
+    }, 7000);
 
     return () => {
       clearTimeout(timer);
     };
   }, []);
 
+ 
+
   return (
     <>
-<Header/>
+<Header showPopup={showPopup}/>
       <div className="parent-class">
         {showPopup && (
           <div className="popup-container">

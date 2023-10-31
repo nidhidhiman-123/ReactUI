@@ -8,7 +8,7 @@ const Cart = () => {
   const [show, setShow] = useState(true);
   const [products, setProducts] = useState([
     {
-      name: "Testin Product",
+      name: "Testing Product",
       image: "./ai3.jpg",
       discountedPrice: 150,
       price: 200,
@@ -16,7 +16,7 @@ const Cart = () => {
       id: 1,
     },
     {
-      name: "Testin Product 2",
+      name: "Testing Product 2",
       image: "./ai3.jpg",
       discountedPrice: 0,
       price: 200,
@@ -24,7 +24,7 @@ const Cart = () => {
       id: 2,
     },
     {
-      name: "Testin Product 3",
+      name: "Testing Product 3",
       image: "./ai3.jpg",
       discountedPrice: 0,
       price: 200,
@@ -32,7 +32,7 @@ const Cart = () => {
       id: 3,
     },
     {
-      name: "Testin Product 4",
+      name: "Testing Product 4",
       image: "./ai3.jpg",
       discountedPrice: 0,
       price: 200,
@@ -53,6 +53,7 @@ const Cart = () => {
       setProducts([...demo]);
     } else {
       if (val == "add") {
+        console.log("testing=-==========",val)
         setProducts([
           ...products.map((el, index) => {
             if (el.id == id) return { ...el, count: el.count + 1 };
@@ -72,9 +73,23 @@ const Cart = () => {
   };
 
   useEffect(() => {
-    increase(products.length)
+    // increase(products.length)
+    let count=0
+    products.forEach((el)=>{
+      count+=el.count
+    })
+    increase(count)
   }, [products])
-  
+  const handleCountChange=(id,val)=>{
+   let c= parseInt(val)
+    setProducts([
+      ...products.map((el, index) => {
+        if (el.id == id)
+          return { ...el, count:c};
+        else return el;
+      }),
+    ]);
+  } 
   return (
     <>
     <Header/>
@@ -87,12 +102,9 @@ const Cart = () => {
             </span>
           </div>
           <div
-            style={{
-              maxHeight: 550,
-              overflowY: "auto",
-            }}
+            className="scroll-container"
           >
-            {products.map((product, index) => (
+            {[...products].map((product, index) => (
               <ShoppingCart
                 key={index}
                 name={product.name}
@@ -102,17 +114,17 @@ const Cart = () => {
                 count={product.count}
                 handleCartItems={handleCartItems}
                 id={product.id}
+                handleCountChange={handleCountChange}
               />
             ))}
-          </div>
           <div className="total-amount-block">
             <div className="total-amount">
-              <span>Savings</span>
-              <span>$150</span>
+              <span className="subtotal-amount">Savings</span>
+              <span className="subtotal-amount">- $150</span>
             </div>
             <div className="total-amount">
-              <span>Subtotal</span>
-              <span>$150</span>
+              <span className="subtotal-amount">Subtotal</span>
+              <span className="subtotal-amount">$150</span>
             </div>
           </div>
           <div className="btn-root-container">
@@ -127,14 +139,15 @@ const Cart = () => {
             <div className="bottom-btn" style={{ backgroundColor: "#000" }}>
               <span className="checkout-txt">CHECKOUT</span>
             </div>
-            <div style={{ height: 20 }} />
+            <div className="fake-border"/>
             <span className="disclaimer-txt">
               Est mi sit consequat cursus. Cras eros in cras aliquam. Adipiscing
               aliquet vehicula nulla nulla adipiscing leo eget neque. Porttitor
               accumsan feugiat pellentesque tristique. Est mi sit consequat
               cursus. Cras eros in cras aliquam.
             </span>
-            <div style={{ height: 40 }} />
+            <div  className="fake-border"/>
+          </div>
           </div>
         </div>
       )}

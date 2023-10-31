@@ -74,7 +74,7 @@ body {
   justify-content: space-between;
   position: absolute;
   top: 50%;
-  width: 50rem;
+  width: 51rem;
   z-index: 1;
   left: 50%;
   transform: translateX(-50%);
@@ -130,7 +130,7 @@ body {
     
   }
   .btn-container {
-    width: 20rem;
+    width: 21rem;
     top: 46%;
   }
   .paragraph {
@@ -152,7 +152,7 @@ body {
     height: 8rem;
   }
   .btn-container {
-    width: 20rem;
+    width: 21rem;
     top: 46%;
   }
   .paragraph {
@@ -174,7 +174,7 @@ body {
     height: 8rem;
   }
   .btn-container {
-    width: 20rem;
+    width: 21rem;
     top: 52%;
   }
   .paragraph {
@@ -212,7 +212,7 @@ body {
     height: 10rem;
   }
   .btn-container {
-    width: 20rem;
+    width: 21rem;
     top: 50%;
   }
   .paragraph {
@@ -245,7 +245,7 @@ body {
     height: 14rem;
   }
   .btn-container {
-    width: 30rem;
+    width: 31rem;
     top: 50%;
   }
   .paragraph {
@@ -263,7 +263,7 @@ body {
     line-height: 20px;
   }
   .btn{
-    bottom: 5%;
+    bottom:1%;
   }
 }
 @media  screen and  (min-width:320px) and (max-width:400px) {
@@ -276,7 +276,7 @@ body {
     height: 7rem;
   }
   .btn-container {
-    width: 18rem;
+    width: 19rem;
     top: 52%;
   }
   .paragraph {

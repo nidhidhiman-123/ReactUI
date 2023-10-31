@@ -22,7 +22,7 @@ function App() {
             <Route exact path="/modal" element={<Modal/>} />
             <Route exact path="/header" element={<Header/>} />
             <Route exact path="/form" element={<Form1/>} />
-            {/* <Route exact path="/products" element={<Products />} /> */}
+            <Route exact path="/products" element={<Products />} />
             <Route exact path="/cart" element={<Cart/>} />
           </Routes>
         </div>

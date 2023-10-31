@@ -1,14 +1,24 @@
 import React, { useState, useRef,useEffect } from 'react';
 import './index.css';
+import { useStore } from "../constant/constant";
 import Cart from '../shoppingCart/cart';
 
-const Header = () => {
+
+const Header = ({showPopup }) => {
+  const {count}=useStore(state=>state)
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isCartOpen, setIsCartOpen] = useState(false); 
   const menuRef = useRef(null);
 
+  const handleCloseCart = () => {
+    setIsCartOpen(false);
+  };
+
   const handleMenuClick = () => {
-    setIsModalOpen(true);
+    if (!showPopup) {
+      setIsModalOpen(true);
+      handleCloseCart();
+    }
   };
 
   const handleCloseModal = () => {
@@ -18,11 +28,12 @@ const Header = () => {
 
   const handleCartClick = (event) => {
     event.stopPropagation();
-    setIsCartOpen(!isCartOpen);
-    setIsModalOpen(false);
+    if (!showPopup) {
+      setIsCartOpen(!isCartOpen);
+      setIsModalOpen(false);
+    }
   };
-
-
+ 
   const getModalPosition = (menuRef) => {
     if (menuRef.current) {
       const rect = menuRef.current.getBoundingClientRect();
@@ -33,13 +44,15 @@ const Header = () => {
     return {};
   };
 
+
+  
   return (
     <div className='parent-header' >
 
       <div className="header">
         {isModalOpen ? (
           <div className="close-menu" onClick={handleCloseModal}>
-            <img src="/close-menu.png" alt="Close Menu" />
+            <img src="/close-menu.png" alt="Close Menu"  />
           </div>
         ) : (
           <div className="menu" onClick={handleMenuClick} ref={menuRef}>
@@ -48,13 +61,17 @@ const Header = () => {
         )}
 
         <div className="gabar">
-          <img src="/gabar.png" alt="Gabar" style={{ maxWidth: '100%', marginRight: '10%' }} />
+          <img src="/gabar.png" alt="Gabar" />
         </div>
         <div style={{position:"relative"}}>
-         <span className="itemCount">
-           10
+         <div className="itemCount">
+         <span className="counter-number">
+           {count}
            </span> 
-        <img src="/Vector.png" style={{height:20,width:20}}  onClick={handleCartClick}/>
+           </div> 
+          
+        <img src="/Vector.png" style={{height:20,width:20}}  onClick={handleCartClick}   
+        />
         </div>
       </div>
 
@@ -64,7 +81,7 @@ const Header = () => {
             <span className="close" onClick={handleCloseModal}>
             </span>
             <div className="custom-div" style={{ width: '256px', height: '101px', top: '0px', left: '35px', position: 'absolute', alignItems: 'center', justifyContent: 'center' }}>
-        <div style={{ color: 'rgba(0, 0, 0, 1)', fontWeight: 300, fontSize: '16px', fontFamily: 'Univers, sans-serif' }}>
+        <div  style={{ color: 'rgba(0, 0, 0, 1)', fontWeight: 300, fontSize: '16px', fontFamily: 'Univers, sans-serif' }}>
           <p>Gabar for Myanmar</p>
           <div style={{ width: '256px', height: '1px', backgroundColor: 'rgba(216, 216, 216, 1)', margin: '-2px 0' }}></div>
           <p>Stores</p>

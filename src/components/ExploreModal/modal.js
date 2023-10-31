@@ -1,7 +1,6 @@
 import React, { useRef, useState,useEffect } from "react";
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
-import { useNavigate } from "react-router-dom";
 
 // Import Swiper styles
 import "swiper/css";
@@ -13,28 +12,29 @@ import "./styles.css";
 // import required modules
 import { Navigation, Pagination, Mousewheel, Keyboard } from "swiper/modules";
 import Header from "../Header/header";
-
+import { useNavigate } from "react-router-dom";
 export default function Modal() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [swiperIndex,setSwiperIndex]=useState(0)
   const [itemList,setItemList]=useState([{src:'/ai1.webp'},{src:'/ai2.jpg'},{src:'/ai3.jpg'},{src:'/bb.webp'}])
   const menuRef = useRef(null);
   const navigate = useNavigate();
+
   const handleMenuClick = () => {
     setIsModalOpen(true);
   };
 
   const handleCloseModal = () => {
     setIsModalOpen(false);
-    
   };
-  
-  const handleExploreNowClick = () => {
+
+  const handleExploreNow = () => {
     navigate("/form");
   };
+
   return (
     <>
-    <Header/>
+    <Header isModalOpen={isModalOpen}/>
     <div className="parent-container">
       <div className="contain">
         <div className="main-container">
@@ -106,8 +106,8 @@ export default function Modal() {
         </div>
         </div>
       </div>
-      <div className="btn"  onClick={handleExploreNowClick}> 
-        <span className="explore">EXPLORE NOW</span>
+      <div className="btn">
+        <span className="explore" onClick={handleExploreNow}>EXPLORE NOW</span>
       </div>
     </div>
     </>

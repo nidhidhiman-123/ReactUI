@@ -4,7 +4,7 @@ import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
 import Header from "../Header/header"
 const Products = ({}) => {
-  const image = ["/Mask2.png", "/productImg.png", "/gelcream.png","/Mask1.png"];
+  const image = ["/Mask2.png", "/productimg.png", "/gelcream.png","/Mask1.png"];
   const [activeImage, setActiveImage] = useState(image[0]);
   const [counter, setCounter] = useState(0);
   const [isSubParentVisible, setIsSubParentVisible] = useState(true);

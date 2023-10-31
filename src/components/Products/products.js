@@ -1,113 +1,131 @@
-// import React, { useState, useEffect } from 'react';
-// import './index.css';
+import React, { useState,useEffect } from "react";
+import "./index.css";
+import AddIcon from "@mui/icons-material/Add";
+import RemoveIcon from "@mui/icons-material/Remove";
+import Header from "../Header/header"
+const Products = ({}) => {
+  const image = ["/Mask2.png", "/productImg.png", "/gelcream.png","/Mask1.png"];
+  const [activeImage, setActiveImage] = useState(image[0]);
+  const [counter, setCounter] = useState(0);
+  const [isSubParentVisible, setIsSubParentVisible] = useState(true);
+  const [cart, setCart] = useState([]);
+  const handleOnChange = (val) => {
+    if (val) {
+      setCounter((e) => e + 1);
+    } else {
+      if (counter != 0) {
+        setCounter((e) => e - 1);
+      }
+    }
+  };
+  const numReg=/^[0-9]*$/
+  const handleChange=(e)=>{
+    if(numReg.test(e.target.value)){
+      if(e.target.value>0){
 
-// const Products = ({ initialImage }) => {
-//   const [isModalOpen, setIsModalOpen] = useState(true);
-//   const [quantity, setQuantity] = useState(1);
-//   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
-//   const imageSources = ["/productimg.png", "/Mask2.png", "/gelcream.png"];
-//   const closeModal = () => {
-//     setIsModalOpen(false);
-//   };
+        if(e.target.value<100)
+        {
+          setCounter(parseInt(e.target.value))
+        }
+      }
+    }
+  }
+  // const handleAddToCart = () => {
+  //   setIsSubParentVisible(false);
+  //   console.log("isSubParentVisible:", isSubParentVisible);
+  // };
 
-//   useEffect(() => {
-//     setIsModalOpen(true);
-//   }, []);
-
-//   const incrementQuantity = () => {
-//     setQuantity(quantity + 1);
-//   };
-
-//   const decrementQuantity = () => {
-//     if (quantity > 1) {
-//       setQuantity(quantity - 1);
-//     }
-//   };
-
-//   const handleImageClick = (index) => {
-//     setSelectedImageIndex(index);
-//   };
-// ;
-//   return (
-//     <div>
-//       {isModalOpen && (
-//         <div className="modal-container">
-//         <div className="modal-content">
-//         <div className="image-container">
-//       {imageSources.map((imageSource, index) => (
-//         <div
-//           key={index}
-//           className={`container ${selectedImageIndex === index ? 'selected-container' : ''}`}
-//           onClick={() => handleImageClick(index)}
-//         >
-//           <img src={imageSource} alt={`Mask ${index + 1}`} className='demo' />
-//         </div>
-//       ))}
-//        </div>
-//       <div className="modal-container1">
-//         <img src={imageSources[selectedImageIndex]} className='demo' alt={`Mask ${selectedImageIndex + 1}`} />
-//       </div>
+  return (
+    <>
+    <Header/>
+    <div className="parent-container-dummy">
+      <div className="sub-parent-container">
    
-//             <div className="modal-container2">
-              
-//               <div className="modal-content2">
-//                 <p className="text">
-//                   Lorem Ipsum Dolor
-//                   <span className="line"></span>   </p>
-//                   <br />
-//                   <div className="text2div">
-//                     <p className="text3">
-//                       $129.99
-//                       <img src="/rectangle.png" alt="Price Tag" className="price-tag-image" />
-//                     </p>
-//                   </div>
-//                   <br />
-//                   <p className="text4">
-//                     $99.99
-//                   </p>
-//                   <br />
-//                   <p className="text5">
-//                     by ordering for later to help us reduce waste
-//                   </p>
-//                   <br />
-//                   <p className="text6">
-//                     Ingredients
-//                   </p>
-//                   <br />
-//                   <p className="text7">
-//                     Sit amet consectetur. Urna est nunc a arcu eros fusce maecenas ut sed.Viverra ut diam turpis purus maecenas. Libero purus consectetur diam dolor rhoncus. Mauris id sit donec facilisi integer. Morbi morbi incondimentum nec turpis sit condimentum suspendisse tincidunt. Tempor a pretium magna eleifend nam tempus quam. Nisl lorem ut pulvinar posuere aliquet amet odio.
-//                     <br />Est mi sit consequat cursus. Cras eros in cras aliquam. Adipiscing aliquet vehicula nulla nulla adipiscing leo eget neque. Porttitor accumsan feugiat pellentesque tristique. Amet integer eu netus vestibulum tempor diam. Nunc donec amet nisi sed sem.Morbi morbi in condimentum nec turpis sit condimentum suspendisse tincidunt. Tempor a pretium magna eleifend nam tempus quam. Nisl lorem ut pulvinar posuere aliquet amet odio.
-//                     <br />Est mi sit consequat cursus. Cras eros in cras aliquam. Adipiscing aliquet vehicula nulla nulla adipiscing leo eget neque. Porttitor accumsan feugiat pellentesque tristique.
-//                     <br />Est mi sit consequat cursus. Cras eros in cras aliquam. Adipiscing aliquet vehicula nulla nulla adipiscing leo eget neque. Porttitor accumsan feugiat pellentesque tristique. Est mi sit consequat cursus. Cras eros in cras aliquam.
-//                     <br />Est mi sit consequat cursus. Cras eros in cras aliquam. Adipiscing aliquet vehicula nulla nulla adipiscing leo eget neque. Porttitor accumsan feugiat pellentesque tristique. Est mi sit consequat cursus. Cras eros in cras aliquam.
-//                     <br />Est mi sit consequat cursus. Cras eros in cras aliquam. Adipiscing aliquet vehicula nulla nulla adipiscing leo eget neque. Porttitor accumsan feugiat pellentesque tristique. Est mi sit consequat cursus. Cras eros in cras aliquam.
-                  
-//                   </p>
-                 
-            
-//               </div>
-//             </div>
-          
-//             <div className="modal-container3">
-//             <div className="quantity-controls">
-//   <span  onClick={incrementQuantity}>+</span>
-//   <span>{quantity}</span>
-//   <span  onClick={decrementQuantity}>-</span>
-// </div>
-//             </div>
-//             <div className="bottom-left-container">
+       {/* <div className={`sub-parent-container ${isSubParentVisible ? "" : "hidden"}`} style={{ display: isSubParentVisible ? "block" : "none" }}> */}
 
-//               <button className="custom-button">ADD TO BAG</button>
+        <div className="item-main-container">
+          <div className="series-image">
+            {image.map((el, index) => {
+              return (
+                <img
+                  src={el}
+                  className="product_image"
+                  onClick={() => setActiveImage(el)}
+                  key={index} 
+                />
+              );
+            })}
+          </div>
+          <div className="zoomed-image">
+            <img src={activeImage} className="main-image" />
+          </div>
+          <div className="other-details">
+            <span className="product-heading">Lorem Ipsum Dolor</span>
+            <span className="product-sub-heading">
+              by ordering for later help us reduce waste
+            </span>
+            <span className="product-sub-heading-test">Ingredients</span>
+            <p className="product-description">
+              Lorem Ipsum Dolor by ordering for later to help us reduce waste
+              Ingredients Sit amet consectetur. Urna est nunc a arcu eros fusce
+              maecenas ut sed. Viverra ut diam turpis purus maecenas. Libero
+              purus consectetur diam dolor rhoncus. Mauris id sit donec facilisi
+              integer. Morbi morbi incondimentum nec turpis sit condimentum
+              suspendisse tincidunt. Tempor a pretium magna eleifend nam tempus
+              quam. Nisl lorem ut pulvinar posuere aliquet amet odio. Est mi sit
+              consequat cursus. Cras eros in cras aliquam. Adipiscing aliquet
+              vehicula nulla nulla adipiscing leo eget neque. Porttitor accumsan
+              feugiat pellentesque tristique. Amet integer eu netus vestibulum
+              tempor diam. Nunc donec amet nisi sed sem.Morbi morbi in
+              condimentum nec turpis sit condimentum suspendisse tincidunt.
+              Tempor a pretium magna eleifend nam tempus quam. Nisl lorem ut
+              pulvinar posuere aliquet amet odio. Est mi sit consequat cursus.
+              Cras eros in cras aliquam. Adipiscing aliquet vehicula nulla nulla
+              adipiscing leo eget neque. Porttitor accumsan feugiat pellentesque
+              tristique. Est mi sit consequat cursus. Cras eros in cras aliquam.
+              Adipiscing aliquet vehicula nulla nulla adipiscing leo eget neque.
+              Porttitor accumsan feugiat pellentesque tristique. Est mi sit
+              consequat cursus. Cras eros in cras aliquam.
+            </p>
+            <span className="stroked-text">$150</span>
+            <div className="bottom-items">
+              <span className="actual-price-text">$150</span>
+              <span className="grad-container">Save 15%</span>
+            </div>
+            <div className="bottom-btn-container">
+              <div className="counter-block">
+                <div className="icon-holder">
+                  <RemoveIcon
+                    fontSize="1rem"
+                    onClick={()=>handleOnChange(false)}
+                  />
+                </div>
 
-//             </div>
-//             <div className="close-icon" onClick={closeModal}>
-//               <img src="/close-icon.png" alt="Close" />
-//             </div>
-//           </div>
-//         </div>
-//       )}
-//     </div>
-//   );
-// };
-
-// export default Products;
+                <input
+                  className="inner-counter-ele"
+                  value={counter}
+                  onChange={handleChange}
+                  inputMode="numeric"
+                />
+                {/* <span className="inner-counter-ele">
+                  {counter}
+                </span> */}
+                <div className="icon-holder2">
+                  <AddIcon
+                    fontSize="1rem"
+                    onClick={()=>handleOnChange(true)}
+                  />
+                </div>
+              </div>
+              <button className="add-cart-btn" >
+                <span className="btn-txt-cart">Add to bag</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </>
+  );
+};
+export default Products;

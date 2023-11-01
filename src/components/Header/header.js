@@ -11,7 +11,6 @@ const Header = () => {
     exploreModal,
     handleItems,
   } = useStore((state) => state);
-  const menuRef = useRef(null);
   return (
     <>
       <div className="header-containers">
@@ -52,60 +51,7 @@ const Header = () => {
         </div>
       </div>
 
-      // {showMenu && (
-      //   <div className="modalss" style={getModalPosition(menuRef)}>
-      //     <div className="modal-contentss">
-      //       <div className="items-option-container">
-      //         <span
-      //           className="option-text"
-      //           onClick={() => handleShowMenu(false)}
-      //         >
-      //           Gabar for Myanmar
-      //         </span>
-      //         <div className="bottom-border" />
-      //         <span
-      //           className="option-text"
-      //           onClick={() => handleShowMenu(false)}
-      //         >
-      //           Stores
-      //         </span>
-      //         <div className="bottom-border" />
-      //         <span
-      //           className="option-text"
-      //           onClick={() => handleShowMenu(false)}
-      //         >
-      //           About us
-      //         </span>
-      //         <div className="bottom-border" />
-      //         <div className="social-links-container">
-      //           <div className="social-links">
-      //             <img src="/instagram.png" className="social-link-img" />
-      //             {/* <span className="social-link-txt">/gabar</span> */}
-      //           </div>
-      //           <div className="social-links">
-      //             <img
-      //               src="/tiktok.png"
-      //               alt="TikTok"
-      //               className="social-link-img"
-      //             />
-      //             {/* <span className="social-link-txt">@gabarinthewild</span> */}
-      //           </div>
-      //         </div>
-      //       </div>
-      //     </div>
-      //   </div>
-      // )}
     </>
-    // </div>
   );
 };
-
-const getModalPosition = (menuRef) => {
-  if (menuRef.current) {
-    const rect = menuRef.current.getBoundingClientRect();
-    return {};
-  }
-  return {};
-};
-
 export default Header;

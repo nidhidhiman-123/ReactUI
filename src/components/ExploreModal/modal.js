@@ -11,7 +11,6 @@ import "./styles.css";
 
 // import required modules
 import { Navigation, Pagination, Mousewheel, Keyboard } from "swiper/modules";
-import Header from "../Header/header";
 import { useStore } from "../constant";
 
 export default function Modal() {
@@ -22,7 +21,6 @@ export default function Modal() {
   const menuRef = useRef(null);
   return (
     <>
-    <Header/>
     <div className="parent-container">
       <div className="contain">
         <div className="main-container">

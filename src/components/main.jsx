@@ -8,12 +8,7 @@ import Cart from './shoppingCart/cart'
 
 export default function MainScreen() {
     const {exploreModal,handleExploreModal,showCart,handleShowCart,formModal,handleFormModal,handleItems,showItems}=useStore(state=>state)
-    useEffect(()=>{
-      setTimeout(()=>{
-        handleFormModal(true)
-        handleShowCart(false)
-      },10000)
-    },[])
+  
   return (
     <>
     <Header/>

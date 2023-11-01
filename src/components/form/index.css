@@ -2,13 +2,12 @@ body {
   margin: 0;
   padding: 0;
 }
-
-
 .parent-class {
   height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: #ccc;
 }
 .popup-container {
   position: relative;

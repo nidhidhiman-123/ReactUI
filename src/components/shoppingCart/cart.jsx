@@ -1,11 +1,11 @@
 import React, { useState,useEffect } from "react";
-import { useStore } from "../constant/constant";
+import { useStore } from "../constant";
 import Header from "../Header/header";
 import ShoppingCart from "./shop";
 import "./styles.css";
 const Cart = () => {
-  const {increase}=useStore(state=>state)
   const [show, setShow] = useState(true);
+  const {showCart,handleShowCart,increase}=useStore(state=>state)
   const [products, setProducts] = useState([
     {
       name: "Testing Product",
@@ -34,7 +34,7 @@ const Cart = () => {
     {
       name: "Testing Product 4",
       image: "./ai3.jpg",
-      discountedPrice: 0,
+      discountedPrice: 50,
       price: 200,
       count: 1,
       id: 4,
@@ -91,13 +91,11 @@ const Cart = () => {
     ]);
   } 
   return (
-    <>
-    <Header/>
-      {show && (
+    <>   
         <div className="main-containerss">
           <div className="cart-header">
             <span className="cart-txt">Your Cart</span>
-            <span className="cart-close" onClick={() => setShow(false)}>
+            <span className="cart-close" onClick={() =>handleShowCart(!showCart)}>
               Close
             </span>
           </div>
@@ -150,7 +148,7 @@ const Cart = () => {
           </div>
           </div>
         </div>
-      )}
+   
     </>
   );
 };

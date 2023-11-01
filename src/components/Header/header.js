@@ -1,106 +1,111 @@
-import React, { useState, useRef,useEffect } from 'react';
-import './index.css';
-import { useStore } from "../constant/constant";
-import Cart from '../shoppingCart/cart';
-
-
-const Header = ({showPopup }) => {
-  const {count}=useStore(state=>state)
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [isCartOpen, setIsCartOpen] = useState(false); 
+import React, { useState, useRef } from "react";
+import { useStore } from "../constant";
+import "./index.css";
+const Header = () => {
+  const { count } = useStore((state) => state);
+  const {
+    handleShowMenu,
+    showMenu,
+    handleShowCart,
+    showCart,
+    exploreModal,
+    handleItems,
+  } = useStore((state) => state);
   const menuRef = useRef(null);
-
-  const handleCloseCart = () => {
-    setIsCartOpen(false);
-  };
-
-  const handleMenuClick = () => {
-    if (!showPopup) {
-      setIsModalOpen(true);
-      handleCloseCart();
-    }
-  };
-
-  const handleCloseModal = () => {
-    console.log("Closing modal");
-    setIsModalOpen(false);
-  };
-
-  const handleCartClick = (event) => {
-    event.stopPropagation();
-    if (!showPopup) {
-      setIsCartOpen(!isCartOpen);
-      setIsModalOpen(false);
-    }
-  };
- 
-  const getModalPosition = (menuRef) => {
-    if (menuRef.current) {
-      const rect = menuRef.current.getBoundingClientRect();
-      return {
-     
-      };
-    }
-    return {};
-  };
-
-
-  
   return (
-    <div className='parent-header' >
-
-      <div className="header">
-        {isModalOpen ? (
-          <div className="close-menu" onClick={handleCloseModal}>
-            <img src="/close-menu.png" alt="Close Menu"  />
+    <>
+      <div className="header-containers">
+        <div className="headerss">
+          {showMenu ? (
+            <img
+              src="/close-menu.png"
+              alt="Close Menu"
+              className="logo-image-cross"
+              onClick={() => handleShowMenu(false)}
+            />
+          ) : (
+            <img
+              src="/menu.png"
+              alt="Close Menu"
+              className="logo-image-cross"
+              onClick={() => handleShowMenu(true)}
+            />
+          )}
+          <img src="/gabar.png" alt="Gabar" className="logo-image" />
+          <div
+            style={{ position: "relative", opacity: !exploreModal ? 0 : 1 }}
+            onClick={() => {
+              if (exploreModal) {
+                handleShowCart(!showCart);
+                handleItems(false);
+              }
+            }}
+          >
+            <div className="itemCount">
+              <span className="counter-number">{count}</span>
+            </div>
+            <img
+              src="/Vector.png"
+              style={{ height: 20, width: 20, opacity: !exploreModal ? 0 : 1 }}
+            />
           </div>
-        ) : (
-          <div className="menu" onClick={handleMenuClick} ref={menuRef}>
-            <img src="/menu.png" alt="Menu" />
-          </div>
-        )}
-
-        <div className="gabar">
-          <img src="/gabar.png" alt="Gabar" />
-        </div>
-        <div style={{position:"relative"}}>
-         <div className="itemCount">
-         <span className="counter-number">
-           {count}
-           </span> 
-           </div> 
-          
-        <img src="/Vector.png" style={{height:20,width:20}}  onClick={handleCartClick}   
-        />
         </div>
       </div>
 
-      {isModalOpen && (
-        <div className="modal" style={getModalPosition(menuRef)}>
-          <div className="modal-content">
-            <span className="close" onClick={handleCloseModal}>
-            </span>
-            <div className="custom-div" style={{ width: '256px', height: '101px', top: '0px', left: '35px', position: 'absolute', alignItems: 'center', justifyContent: 'center' }}>
-        <div  style={{ color: 'rgba(0, 0, 0, 1)', fontWeight: 300, fontSize: '16px', fontFamily: 'Univers, sans-serif' }}>
-          <p>Gabar for Myanmar</p>
-          <div style={{ width: '256px', height: '1px', backgroundColor: 'rgba(216, 216, 216, 1)', margin: '-2px 0' }}></div>
-          <p>Stores</p>
-          <div style={{ width: '256px', height: '1px', backgroundColor: 'rgba(216, 216, 216, 1)', margin: '-2px 0' }}></div>
-          <p>About us</p>
-          <div style={{ width: '256px', height: '1px', backgroundColor: 'rgba(216, 216, 216, 1)', margin: '-2px 0' }}></div>
-          <p>
-            <img src="/instagram.png" alt="Instagram" style={{ marginRight: '35px' }} />
-            <img src="/tiktok.png" alt="TikTok" />
-          </p>
-      </div>
-      </div>
+      {showMenu && (
+        <div className="modalss" style={getModalPosition(menuRef)}>
+          <div className="modal-contentss">
+            <div className="items-option-container">
+              <span
+                className="option-text"
+                onClick={() => handleShowMenu(false)}
+              >
+                Gabar for Myanmar
+              </span>
+              <div className="bottom-border" />
+              <span
+                className="option-text"
+                onClick={() => handleShowMenu(false)}
+              >
+                Stores
+              </span>
+              <div className="bottom-border" />
+              <span
+                className="option-text"
+                onClick={() => handleShowMenu(false)}
+              >
+                About us
+              </span>
+              <div className="bottom-border" />
+              <div className="social-links-container">
+                <div className="social-links">
+                  <img src="/instagram.png" className="social-link-img" />
+                  {/* <span className="social-link-txt">/gabar</span> */}
+                </div>
+                <div className="social-links">
+                  <img
+                    src="/tiktok.png"
+                    alt="TikTok"
+                    className="social-link-img"
+                  />
+                  {/* <span className="social-link-txt">@gabarinthewild</span> */}
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       )}
- { isCartOpen && <Cart />}
-    </div>
+    </>
+    // </div>
   );
 };
 
+const getModalPosition = (menuRef) => {
+  if (menuRef.current) {
+    const rect = menuRef.current.getBoundingClientRect();
+    return {};
+  }
+  return {};
+};
 
 export default Header;

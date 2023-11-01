@@ -1,10 +1,9 @@
 import React, { useState,useEffect } from "react";
+import { useStore } from "../constant";
 import "./index.css";
-import Header from "../Header/header";
-import { useNavigate } from "react-router-dom";
 const Form1 = () => {
-  const [showPopup, setShowPopup] = useState(false);
-  const navigate = useNavigate();
+  const [showPopup, setShowPopup] = useState(true);
+  const {handleFormModal}=useStore(state=>state)
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -53,39 +52,32 @@ const Form1 = () => {
     e.preventDefault();
 
     if (validateForm()) {
-      console.log(formData);
       setFormData({ name: "", email: "" });
-      navigate("/products");
+      handleFormModal(false)
     }
-   
   };
 
   const handleCloseIconClick = (e) => {
     e.stopPropagation();
     setShowPopup(false);
-    navigate("/products");
   };
 
   useEffect(() => {
     const timer = setTimeout(() => {
       setShowPopup(true);
-    }, 7000);
+    }, 10000);
 
     return () => {
       clearTimeout(timer);
     };
   }, []);
 
- 
-
   return (
     <>
-<Header showPopup={showPopup}/>
       <div className="parent-class">
-        {showPopup && (
           <div className="popup-container">
             <div className="close-icon" onClick={handleCloseIconClick}>
-              <img className="close-img" src="/close-icon.png" alt="Close" />
+              <img className="close-img" src="/close-icon.png" alt="Close" onClick={()=>handleFormModal(false)}/>
             </div>
             <div className="headertext">
               <span className="text1">
@@ -134,7 +126,7 @@ const Form1 = () => {
             </div>
            
               </div>
-        )}
+       
       </div>
     </>
   );

@@ -12,8 +12,7 @@ export default function MainScreen() {
   return (
     <>
     <Header/>
-        <Cart/>
-{/*     {!exploreModal && <Modal/>}
+    {!exploreModal && <Modal/>}
     {showCart && !formModal && <Cart/>}
     {formModal && <Form1/>}
     {showItems && <Dummy/>}
@@ -30,7 +29,7 @@ export default function MainScreen() {
       handleItems(true)
     }}>
     <span>Show Items</span>
-    </div> */}
+    </div>
     </>
   )
 }

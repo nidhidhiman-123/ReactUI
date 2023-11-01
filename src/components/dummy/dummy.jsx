@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import "./index.css";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
-import Header from "../Header/header"
 const Dummy = () => {
   const image = ["/test1.png", "/test2.png", "/test3.png","/test4.png"];
   const [activeImage, setActiveImage] = useState(image[0]);
@@ -30,7 +29,6 @@ const Dummy = () => {
   }
   return (
     <>
-    <Header/>
     <div className="parent-container-dummy">
       <div className="sub-parent-container">
         <div className="item-main-container">
